@@ -45,4 +45,12 @@ The CARculator age-band values retrieved on 3 October 2026 matched the current G
 - [HMRC salary sacrifice guidance](https://www.gov.uk/hmrc-internal-manuals/national-minimum-wage-manual/nmwm09300)
 - [GOV.UK hours and salaried work guidance](https://www.gov.uk/guidance/calculating-the-minimum-wage/working-hours-for-which-the-minimum-wage-must-be-paid)
 
-No deployment has been performed.
+## Netlify
+
+The Netlify function reads the same existing API as CARculator's hosted admin page. The frontend calls `/api/reference-data`, which is routed to this function. No Python server is required on Netlify.
+
+Set `CARCULATOR_PASSKEY` in the Netlify project environment variables (Functions scope, or all scopes) to the existing scheme passkey. It must not be a frontend variable or committed to Git. Optionally set `CARCULATOR_API_BASE_URL` if CARculator changes its API; its current deployed API is the default.
+
+Deploy with build command `node scripts/build.js`, publish directory `public`, and functions directory `netlify/functions`, as configured in `netlify.toml`. Environment-variable changes require a fresh deployment. For manual deployment with the Netlify CLI, build locally, then deploy both `public` and `netlify/functions`; a browser drag-and-drop of static files alone does not deploy this backend.
+
+Shared table updates become available on the next page load without a calculator redeployment.

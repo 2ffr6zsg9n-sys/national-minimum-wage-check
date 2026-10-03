@@ -1,0 +1,12 @@
+[build]
+  publish = "public"
+  command = "node scripts/build.js"
+
+[functions]
+  directory = "netlify/functions"
+
+[[redirects]]
+  from = "/api/reference-data"
+  to = "/.netlify/functions/reference-data"
+  status = 200
+  force = true

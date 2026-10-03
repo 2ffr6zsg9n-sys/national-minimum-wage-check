@@ -11,7 +11,10 @@ async function loadReferenceData() {
   $('data-status').hidden = false; $('data-status').textContent = 'Loading pay and minimum wage rates…';
   try {
     const response = await fetch('/api/reference-data', { cache: 'no-store' });
-    if (!response.ok) throw new Error('Pay and minimum wage rates could not be loaded.');
+    if (!response.ok) {
+      const problem = await response.json().catch(() => ({}));
+      throw new Error(problem.error || 'Pay and minimum wage rates could not be loaded.');
+    }
     const data = await response.json();
     if (!Array.isArray(data.afc) || !data.afc.length || !Array.isArray(data.nmw) || !data.nmw.length) throw new Error('The shared tables are empty or unavailable.');
     const today = new Date().toISOString().slice(0, 10);
@@ -100,4 +103,3 @@ $('calculator').addEventListener('submit', e => { e.preventDefault(); try { vali
 $('back').addEventListener('click', () => showStep(step - 1));
 $('edit').addEventListener('click', () => showStep(0));
 $('restart').addEventListener('click', () => { $('calculator').reset(); updateFields(); showStep(0); });
-

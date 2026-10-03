@@ -4,3 +4,5 @@ __pycache__/
 *.pyc
 preview.png
 .DS_Store
+public/
+.netlify/
