@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>National Minimum Wage Check</title><link rel="stylesheet" href="style.css"><script defer src="calculation.js"></script><script defer src="app.js"></script></head>
+<body>
+<header><div class="brand"><span class="nhs-mark" role="img" aria-label="NHS">NHS</span> National Minimum Wage Check</div><span class="header-note">Salary sacrifice calculator</span></header>
+<main>
+<div class="intro"><h1>Check your pay after salary sacrifice.</h1><p>Find out whether your basic hourly pay would meet the minimum wage for your age.</p></div>
+<div class="layout">
+
+<section class="card">
+<p id="data-status" role="status">Loading pay and minimum wage rates…</p><button id="retry" type="button" class="secondary" hidden>Retry loading rates</button>
+<form id="calculator" novalidate>
+<section class="step" data-step="0" aria-labelledby="title-0">
+<p class="step-label">Step 1 of 4</p><h2 id="title-0" tabindex="-1">Your basic pay</h2>
+<fieldset><legend>Should Agenda for Change rates be used?</legend><div class="choices"><label><input type="radio" name="afc" value="yes" required> Yes</label><label><input type="radio" name="afc" value="no"> No</label></div></fieldset>
+<div id="afc-fields" hidden><label for="afc-pay">Full-time annual basic pay</label><p class="hint">Choose your band and full-time annual basic pay.</p><select id="afc-pay"><option value="">Select your annual pay</option></select></div>
+<div id="manual-fields" hidden><label for="manual-pay">Full-time equivalent annual basic pay</label><p class="hint">Enter the annual salary for a full-time post, before any salary sacrifice.</p><div class="amount"><span>£</span><input id="manual-pay" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="For example, 32000"></div></div>
+</section>
+<section class="step" data-step="1" aria-labelledby="title-1" hidden>
+<p class="step-label">Step 2 of 4</p><h2 id="title-1" tabindex="-1">Your contracted hours</h2>
+<div id="unit-fields" hidden><fieldset><legend>How is your working time expressed?</legend><div class="choices"><label><input type="radio" name="unit" value="hours" checked> Hours</label><label><input type="radio" name="unit" value="sessions"> Sessions</label></div></fieldset></div>
+<label id="contracted-label" for="contracted">Contracted hours per week</label><p class="hint" id="contracted-hint">Enter your own contracted hours, whether full-time or part-time.</p><input id="contracted" type="number" min="0.01" step="any" inputmode="decimal" value="37.5" required>
+<label id="whole-label" for="whole">Whole-time equivalent hours per week</label><input id="whole" type="number" min="0.01" step="any" inputmode="decimal" value="37.5" required><p id="whole-hint" class="hint">Agenda for Change whole-time hours are fixed at 37.5 per week.</p>
+<div id="session-fields" hidden><label for="session-hours">Hours per session</label><p class="hint">Use the same session length for your contracted and whole-time sessions.</p><input id="session-hours" type="number" min="0.01" step="any" inputmode="decimal" value="4"></div>
+</section>
+<section class="step" data-step="2" aria-labelledby="title-2" hidden>
+<p class="step-label">Step 3 of 4</p><h2 id="title-2" tabindex="-1">Your salary sacrifice</h2><label for="sacrifice">Salary sacrifice amount</label><p class="hint">Enter the annual salary sacrifices (including existing and proposed new salary sacrifices). Use the gross amount before savings on tax, NI, and pension.</p><div class="amount"><span>£</span><input id="sacrifice" type="number" min="0" step="0.01" inputmode="decimal" placeholder="For example, 250" required></div>
+<fieldset><legend>Is this a monthly or annual amount?</legend><div class="choices"><label><input type="radio" name="period" value="monthly" checked> Monthly</label><label><input type="radio" name="period" value="annual"> Annual</label></div></fieldset><p class="hint">For an annual amount, this estimate assumes it is spread equally across 12 months.</p>
+</section>
+<section class="step" data-step="3" aria-labelledby="title-3" hidden>
+<p class="step-label">Step 4 of 4</p><h2 id="title-3" tabindex="-1">Your age band</h2><label for="age">Select your age band</label><select id="age" required><option value="">Select your age band</option></select><p class="hint">The under-18 rate applies from school leaving age. This calculator uses standard age rates. Eligible apprentices may have a different minimum rate.</p>
+</section>
+<p id="error" role="alert" hidden></p><div class="actions"><button type="button" class="secondary" id="back" hidden>Back</button><button type="submit" id="next" disabled>Continue <span aria-hidden="true">→</span></button></div>
+</form>
+<section id="results" aria-labelledby="result-title" hidden><p class="step-label">Your NMW check results</p><h2 id="result-title" tabindex="-1">Your result</h2><div id="verdict" role="status"></div><div class="rate-grid"><div><span>Hourly pay after sacrifice</span><strong id="after"></strong></div><div><span>National minimum wage</span><strong id="minimum"></strong></div></div><p id="comparison"></p><dl id="breakdown"></dl><div class="actions"><button id="edit" class="secondary" type="button">Edit details</button><button id="restart" type="button">Start again</button></div></section>
+</section></div>
+<footer><p class="copyright">© 2026 South West Yorkshire Partnership Teaching NHS FT</p></footer>
+</main></body></html>
